@@ -1,13 +1,20 @@
 ﻿import tkinter as tk
 from tkinter import messagebox
+import pygame
 
 def explain_python():
-    # Fereastră principală
+   
+    pygame.mixer.init()
+
+    def play_sound(file):
+        pygame.mixer.Sound(file).play()
+
+    
     root = tk.Tk()
     root.title("python helper")
     root.geometry("640x480")
+
     
-    # Eticheta cu introducerea
     intro_label = tk.Label(root, text=(
         "Bună ziua! Astăzi o să vă arăt ce este Python și cu ce se ocupă.\n\n"
         "Python este un limbaj de programare interpretat, open-source, de nivel înalt, "
@@ -20,26 +27,46 @@ def explain_python():
     ), wraplength=480, justify="left")
     intro_label.pack(pady=10)
 
-    # Butoane pentru diferite secțiuni
-    learn_button = tk.Button(root, text="Cum pot învăța Python?", command=ask_about_learning)
+    
+    def on_learn_button():
+        play_sound("sunetselectie.mp3")
+        ask_about_learning()
+
+    def on_usage_button():
+        play_sound("sunetselectie.mp3")
+        ask_about_usage()
+
+    def on_jobs_button():
+        play_sound("sunetselectie.mp3")
+        ask_about_jobs()
+
+    def on_advantages_button():
+        play_sound("sunetselectie.mp3")
+        ask_about_advantages()
+
+    def on_exit_button():
+        play_sound("sunetiesire.mp3")
+        root.destroy()
+
+   
+    learn_button = tk.Button(root, text="Cum pot învăța Python?", command=on_learn_button)
     learn_button.pack(pady=5)
 
-    usage_button = tk.Button(root, text="Care sunt utilizările Python?", command=ask_about_usage)
+    usage_button = tk.Button(root, text="Care sunt utilizările Python?", command=on_usage_button)
     usage_button.pack(pady=5)
 
-    jobs_button = tk.Button(root, text="Ce joburi pot avea dacă știu Python?", command=ask_about_jobs)
+    jobs_button = tk.Button(root, text="Ce joburi pot avea dacă știu Python?", command=on_jobs_button)
     jobs_button.pack(pady=5)
 
-    advantages_button = tk.Button(root, text="Avantajele Python față de alte limbaje", command=ask_about_advantages)
+    advantages_button = tk.Button(root, text="Avantajele Python față de alte limbaje", command=on_advantages_button)
     advantages_button.pack(pady=5)
 
-    # Buton pentru ieșire
-    exit_button = tk.Button(root, text="Ieșire", command=root.destroy)
+   
+    exit_button = tk.Button(root, text="Ieșire", command=on_exit_button)
     exit_button.pack(pady=10)
 
-    # Rulăm fereastra principală
+    
     root.mainloop()
-
 
 def ask_about_learning():
     messagebox.showinfo(
@@ -49,7 +76,6 @@ def ask_about_learning():
             "Ca sa înveti python mai usor incepe prin a scrie câteva programe simple!"
         )
     )
-
 
 def ask_about_usage():
     messagebox.showinfo(
@@ -63,12 +89,11 @@ def ask_about_usage():
         )
     )
 
-
 def ask_about_jobs():
     messagebox.showinfo(
         "Joburi pentru cunoscătorii de Python",
         (
-            "Cunoașterea Python îți poate deschide uși către multe cariere, inclusiv:\n"
+            "Cunoașterea Python îti poate deschide uși către multe cariere, inclusiv:\n"
             "- Dezvoltator software/web\n"
             "- Inginer de machine learning\n"
             "- Automatizare \n"
@@ -79,7 +104,6 @@ def ask_about_jobs():
         )
     )
 
-
 def ask_about_advantages():
     messagebox.showinfo(
         "Avantajele Python față de alte limbaje",
@@ -89,12 +113,10 @@ def ask_about_advantages():
             "-Comunitate mare și biblioteci extinse**: Există resurse aproape pentru orice nevoie, ceea ce nu e întotdeauna cazul cu alte limbaje.\n"
             "-Versatilitate: Python este folosit în multiple domenii, de la web development la AI și data science.\n"
             "-Portabilitate: Codul Python poate rula pe diferite platforme fără modificări majore.\n"
-            -"Productivitate ridicată: Python permite dezvoltarea rapidă a aplicațiilor, reducând timpul necesar pentru prototipuri.\n\n"
+            "-Productivitate ridicată: Python permite dezvoltarea rapidă a aplicațiilor, reducând timpul necesar pentru prototipuri.\n\n"
             "Toate acestea fac Python un limbaj atractiv pentru toti programatorii de la incepatori pana la avansati."
         )
     )
 
-
 if __name__ == "__main__":
     explain_python()
-    
